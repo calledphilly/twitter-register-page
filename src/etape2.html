@@ -127,6 +127,22 @@
       yearInput.appendChild(option);
 
     }
+
+    const button = document.querySelector('a');
+
+    function checkDateInput() {
+      const isDateInputFilled = dateInput.value.trim() !== '';
+
+      button.classList.toggle('bg-[#777A7A]', !isDateInputFilled);
+      button.classList.toggle('bg-twitter-white', isDateInputFilled);
+
+    }
+
+    dateInput.addEventListener('change', checkDateInput )
+
+    button.addEventListener('click', event => {
+      !button.classList.contains('bg-twitter-white') ? event.preventDefault() : null;
+    });
     
   </script>
 </body>

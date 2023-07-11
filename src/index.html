@@ -44,9 +44,7 @@
 
     inputs.forEach(input => input.addEventListener('input', checkInputs));
     button.addEventListener('click', event => {
-      if (!button.classList.contains('bg-twitter-white')) {
-        event.preventDefault();
-      }
+      !button.classList.contains('bg-twitter-white') ? event.preventDefault() : null;
     });
 
   </script>

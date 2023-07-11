@@ -43,8 +43,7 @@
         if (event.key==="Backspace") {
           input.value='';
 
-          if (i !==0)
-          inputs[i - 1].focus();
+          i !==0 ? inputs[i - 1].focus() : null;
         
         } else {
             if (i===inputs.length - 1 && inputs[i].value !=='' ) {
@@ -53,16 +52,14 @@
             } else if (47 < event.keyCode && event.keyCode < 58) {
                 input.value=event.key;
 
-                if (i !==inputs.length - 1)
-                  inputs[i + 1].focus();
+                i !==inputs.length - 1 ? inputs[i + 1].focus() : null;
                 
                 event.preventDefault();
 
               } else if (64 < event.keyCode && event.keyCode < 91) {
                   input.value=String.fromCharCode(event.keyCode); 
                   
-                  if (i !==inputs.length - 1)
-                    inputs[i + 1].focus();
+                  i !==inputs.length - 1 ? inputs[i + 1].focus() : null;
                   
                   event.preventDefault(); 
                 } 
