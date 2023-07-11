@@ -23,11 +23,13 @@
         </p>
 
         <div class=" relative flex justify-between">
+          <input type="date" name="" id="dateInput" class="hidden">
+
           <div class="w-[45%] h-11  relative">
-            <label class=" absolute top-1 left-2 text-xs text-[#71767A]" for="month">
+            <label class=" absolute top-1 left-2 text-xs text-[#71767A]" for="monthInput">
               Mois
             </label>
-            <select class="w-full h-full pl-2 pt-4 bg-black  text-twitter-white text-sm  appearance-none border border-[#333639] focus:outline-none focus:ring-2 focus:ring-[#1A8BD6] rounded " name="" id="month">
+            <select class="w-full h-full pl-2 pt-4 bg-black  text-twitter-white text-sm  appearance-none border border-[#333639] focus:outline-none focus:ring-2 focus:ring-[#1A8BD6] rounded " name="" id="monthInput">
               <option value="" selected></option>
               <option value="">Janvier</option>
               <option value="">Février</option>
@@ -45,10 +47,10 @@
           </div>
 
           <div class="w-[22%] relative">
-            <label class=" absolute top-1 left-2 text-xs text-[#71767A]" for="day">
+            <label class=" absolute top-1 left-2 text-xs text-[#71767A]" for="dayInput">
               Jour
             </label>
-            <select class="w-full h-full pl-2 pt-4 bg-black  text-twitter-white text-sm appearance-none border border-[#333639] focus:outline-none focus:ring-2 focus:ring-[#1A8BD6] rounded " name="" id="day">
+            <select class="w-full h-full pl-2 pt-4 bg-black  text-twitter-white text-sm appearance-none border border-[#333639] focus:outline-none focus:ring-2 focus:ring-[#1A8BD6] rounded " name="" id="dayInput">
               <option value="" selected></option>
               <option value="">1</option>
               <option value="">2</option>
@@ -66,18 +68,11 @@
           </div>
 
           <div class="w-[25%] relative">
-            <label class=" absolute top-1 left-2 text-xs text-[#71767A]" for="year">
+            <label class="absolute top-1 left-2 text-xs text-[#71767A]" for="yearInput">
               Année
             </label>
-            <select class="w-full h-full pl-2 pt-4 bg-black  text-twitter-white text-sm appearance-none border border-[#333639] focus:outline-none  focus:ring-2 focus:ring-[#1A8BD6] rounded " name="" id="year">
+            <select class="w-full h-full pl-2 pt-4 bg-black  text-twitter-white text-sm appearance-none border border-[#333639] focus:outline-none  focus:ring-2 focus:ring-[#1A8BD6] rounded " name="" id="yearInput">
               <option value="" selected></option>
-              <option value="">2023</option>
-              <option value="">2022</option>
-              <option value="">2021</option>
-              <option value="">2020</option>
-              <option value="">2019</option>
-              <option value="">2018</option>
-              <option value="">2017</option>
             </select>
           </div>
         </div>
@@ -93,26 +88,45 @@
 
   <script type="text/javascript">
 
-    const table = [month, day, year];
+    const table = [monthInput, dayInput, yearInput];
 
+    // change la couleur du label d'un input
     table.forEach(element => {
       const label = element.labels[0];
-      /* console.log(label); */
+      // console.log(label);
 
-      element.addEventListener('focus', () => {
-            label.classList.remove('text-[#71767A]');
-            label.classList.add('text-[#1A8BD6]');
-            /* console.log(label); */
-        }
-      )
-        
-      element.addEventListener('blur', () => {
-            label.classList.remove('text-[#1A8BD6]');
-            label.classList.add('text-[#71767A]');
-            /* console.log(label); */
-        }
-      )
+    element.addEventListener('focus', () => {
+      label.classList.remove('text-[#71767A]');
+      label.classList.add('text-[#1A8BD6]');
+            //console.log(label);
     })
+        
+    element.addEventListener('blur', () => {
+        label.classList.remove('text-[#1A8BD6]');
+        label.classList.add('text-[#71767A]');
+            //console.log(label);
+      })
+    })
+
+    
+
+    dateInput.addEventListener('change', function() {
+      const selectedDate = new Date(this.value);
+
+      dayInput.value = selectedDate.getDate();
+      monthInput.value = selectedDate.getMonth() + 1; // Les mois sont indexés à partir de 0, donc on ajoute 1
+      yearInput.value = selectedDate.getFullYear();
+    });
+
+    const currentYear = new Date().getFullYear();
+    const startYear = currentYear - 150; // Année de départ (par exemple, 150 ans en arrière)
+
+    for (let yearList = currentYear; yearList >= startYear; yearList--) {
+      const option = document.createElement('option');
+      option.innerHTML = yearList;
+      yearInput.appendChild(option);
+
+    }
     
   </script>
 </body>
