@@ -32,7 +32,7 @@
             <select class="w-full h-full pl-2 pt-4 bg-black  text-twitter-white text-sm  appearance-none border border-[#333639] focus:outline-none focus:ring-2 focus:ring-[#1A8BD6] rounded " name="" id="month">
               <option value="" selected></option>
               <option value="">Janvier</option>
-              <option value="">Fevrier</option>
+              <option value="">Février</option>
               <option value="">Mars</option>
               <option value="">Avril</option>
               <option value="">Mai</option>
@@ -42,7 +42,7 @@
               <option value="">Septembre</option>
               <option value="">Octobre</option>
               <option value="">Novembre</option>
-              <option value="">Decombre</option>
+              <option value="">Décembre</option>
             </select>
           </div>
 
@@ -84,29 +84,32 @@
           </div>
         </div>
 
-        <input class="w-full mt-32 py-3 bg-[#777A7A] rounded-full text-[#080A0E] text-sm font-extrabold  " type="submit" value="Suivant" id="">
+        <button class="w-full mt-32 py-3 bg-[#777A7A] rounded-full text-[#080A0E] text-sm font-extrabold  " type="submit" value="Suivant" id="">Suivant</button>
       </form>
     </div>
 
   </div>
-  <script>
+  <script type="text/javascript">
     const month = document.getElementById('month');
     const day = document.getElementById('day');
     const year = document.getElementById('year');
 
-    const table = [ month, day, year ]
+    const table = [ month, day, year ];
 
     table.forEach(element => {
+      const label = element.labels[0];
+      
       element.addEventListener('focus', () => {
-          element.labels[0].classList.add('text-[#1A8BD6]');
-        }
-      )
-
-      element.addEventListener('blur', () => {
-          element.labels[0].classList.remove('text-[#1A8BD6]');
+          label.classList.add('text-[#1A8BD6]');
         }
       )
     })
+
+   /*  table.forEach(element => {
+      element.addEventListener('blur', () => {
+        element.labels[0].classList.remove('text-[#1A8BD6]');
+      })
+    }) */
     
   </script>
 </body>
