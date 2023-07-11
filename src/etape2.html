@@ -22,7 +22,8 @@
           Cette information ne sera pas affichée publiquement. Confirmez votre âge, même si ce compte est pour une entreprise, un animal de compagnie ou autre chose.
         </p>
 
-        <input type="date" name="" id="dateInput" class=" w-full ">
+        <input type="date" name="" id="dateInput" class="hidden w-full ">
+
         <div class=" relative flex justify-between">
 
           <div class="w-[45%] h-11  relative">
@@ -31,18 +32,18 @@
             </label>
             <select class="w-full h-full pl-2 pt-4 bg-black  text-twitter-white text-sm  appearance-none border border-[#333639] focus:outline-none focus:ring-2 focus:ring-[#1A8BD6] rounded " name="" id="monthInput">
               <option value="" selected></option>
-              <option value="0">Janvier</option>
-              <option value="1">Février</option>
-              <option value="2">Mars</option>
-              <option value="3">Avril</option>
-              <option value="4">Mai</option>
-              <option value="5">Juin</option>
-              <option value="6">Juillet</option>
-              <option value="7">Aout</option>
-              <option value="8">Septembre</option>
-              <option value="9">Octobre</option>
-              <option value="10">Novembre</option>
-              <option value="11">Décembre</option>
+              <option value="01">Janvier</option>
+              <option value="02">Février</option>
+              <option value="03">Mars</option>
+              <option value="04">Avril</option>
+              <option value="05">Mai</option>
+              <option value="06">Juin</option>
+              <option value="07">Juillet</option>
+              <option value="08">Aout</option>
+              <option value="09">Septembre</option>
+              <option value="10">Octobre</option>
+              <option value="11">Novembre</option>
+              <option value="12">Décembre</option>
             </select>
           </div>
 
@@ -53,15 +54,15 @@
             <select class="w-full h-full pl-2 pt-4 bg-black  text-twitter-white text-sm appearance-none border border-[#333639] focus:outline-none focus:ring-2 focus:ring-[#1A8BD6] rounded " name="" id="dayInput">
               <option value="" selected></option>
               option{$}*31
-              <option value="1">1</option>
-              <option value="2">2</option>
-              <option value="3">3</option>
-              <option value="4">4</option>
-              <option value="5">5</option>
-              <option value="6">6</option>
-              <option value="7">7</option>
-              <option value="8">8</option>
-              <option value="9">9</option>
+              <option value="01">1</option>
+              <option value="02">2</option>
+              <option value="03">3</option>
+              <option value="04">4</option>
+              <option value="05">5</option>
+              <option value="06">6</option>
+              <option value="07">7</option>
+              <option value="08">8</option>
+              <option value="09">9</option>
               <option value="10">10</option>
               <option value="11">11</option>
               <option value="12">12</option>
@@ -115,32 +116,45 @@
       const label = element.labels[0];
       // console.log(label);
 
-    element.addEventListener('focus', () => {
-      label.classList.remove('text-[#71767A]');
-      label.classList.add('text-[#1A8BD6]');
-            //console.log(label);
-    })
-        
-    element.addEventListener('blur', () => {
+      element.addEventListener('focus', () => {
+        label.classList.remove('text-[#71767A]');
+        label.classList.add('text-[#1A8BD6]');
+              //console.log(label);
+      })
+          
+      element.addEventListener('blur', () => {
         label.classList.remove('text-[#1A8BD6]');
         label.classList.add('text-[#71767A]');
-            //console.log(label);
+              //console.log(label);
       })
     })
 
-    dateInput.addEventListener('change', function() {
+    // new Date(this.value).getDate
+    // console.dir(dateInput.value)
+    /* dateInput.addEventListener('change', function() {
       const selectedDate = new Date(this.value);
-
+      //console.dir(dateInput.value);
       dayInput.value = selectedDate.getDate();
       monthInput.value = selectedDate.getMonth() + 1; // Les mois sont indexés à partir de 0, donc on ajoute 1
       yearInput.value = selectedDate.getFullYear();
-    });
+    }) */
+    
+    document.addEventListener('change', () => {
+      // console.log('lui');
+
+      areDateInputsFilled = table.every(element => element.value.trim() !== '');
+      areDateInputsFilled ? dateInput.value = `${yearInput.value}-${monthInput.value}-${dayInput.value}` : null;
+
+      console.log(dateInput.value);
+    })
+
 
     const currentYear = new Date().getFullYear();
     const startYear = currentYear - 150; // Année de départ (par exemple, 150 ans en arrière)
 
     for (let yearList = currentYear; yearList >= startYear; yearList--) {
       const option = document.createElement('option');
+      option.value = yearList ;
       option.innerHTML = yearList;
       yearInput.appendChild(option);
 
@@ -151,12 +165,18 @@
     function checkDateInput() {
       const isDateInputFilled = dateInput.value.trim() !== '';
 
-      button.classList.toggle('bg-[#777A7A]', !isDateInputFilled);
-      button.classList.toggle('bg-twitter-white', isDateInputFilled);
+      isDateInputFilled ? button.classList.remove('bg-[#777A7A]') : null;
+      isDateInputFilled ? button.classList.add('bg-twitter-white') : null;
+
+      !isDateInputFilled ? button.classList.add('bg-[#777A7A]') : null;
+      !isDateInputFilled ? button.classList.remove('bg-twitter-white') : null;
+      // console.log(dateInput.value);
+      /* button.classList.toggle('bg-[#777A7A]', isDateInputFilled);
+      button.classList.toggle('bg-twitter-white', isDateInputFilled); */
 
     }
 
-    dateInput.addEventListener('change', checkDateInput )
+    document.addEventListener('change', checkDateInput );
 
     button.addEventListener('click', event => {
       !button.classList.contains('bg-twitter-white') ? event.preventDefault() : null;
