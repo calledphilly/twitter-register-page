@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="../dist/main.css">
+  <title>Twitter register page</title>
+</head>
+<body class="bg-bleu h-screen w-screen flex ">
+  <div class="m-auto w-[600px] h-[650px]  bg-black rounded-2xl">
+    
+    <div class="bg-black h-[10%]">
+      <h2 class="text-twitter-white text-lg pt-3 pl-[12%]">Étapes 2/5</h2>
+    </div>
+
+    <div class="h-[90%] w-[72%] bg-white m-auto">
+      <h1 class="text-3xl text-twitter-white bg-black h-[12%] pl-2">Créer votre compte</h1>
+      <form action="" class="relative bg-black h-[88%]" >
+        
+        <p class=" mb-2 text-sm text-twitter-white ">Date de naissance</p>
+        <p class=" text-sm text-[#71767A] pb-3">
+          Cette information ne sera pas affichée publiquement. Confirmez votre âge, même si ce compte est pour une entreprise, un animal de compagnie ou autre chose.
+        </p>
+
+        <div class=" relative flex justify-between">
+          <div class="w-[45%] h-11  relative">
+            <label class=" absolute top-1 left-2 text-xs text-[#71767A]" for="month">
+              Mois
+            </label>
+            <select class="w-full h-full pl-2 pt-4 bg-black  text-twitter-white text-sm  appearance-none border border-[#333639] focus:outline-none focus:ring-2 focus:ring-[#1A8BD6] rounded " name="" id="month">
+              <option value="" selected></option>
+              <option value="">Janvier</option>
+              <option value="">Février</option>
+              <option value="">Mars</option>
+              <option value="">Avril</option>
+              <option value="">Mai</option>
+              <option value="">Juin</option>
+              <option value="">Juillet</option>
+              <option value="">Aout</option>
+              <option value="">Septembre</option>
+              <option value="">Octobre</option>
+              <option value="">Novembre</option>
+              <option value="">Décembre</option>
+            </select>
+          </div>
+
+          <div class="w-[22%] relative">
+            <label class=" absolute top-1 left-2 text-xs text-[#71767A]" for="day">
+              Jour
+            </label>
+            <select class="w-full h-full pl-2 pt-4 bg-black  text-twitter-white text-sm appearance-none border border-[#333639] focus:outline-none focus:ring-2 focus:ring-[#1A8BD6] rounded " name="" id="day">
+              <option value="" selected></option>
+              <option value="">1</option>
+              <option value="">2</option>
+              <option value="">3</option>
+              <option value="">4</option>
+              <option value="">5</option>
+              <option value="">6</option>
+              <option value="">7</option>
+              <option value="">8</option>
+              <option value="">9</option>
+              <option value="">10</option>
+              <option value="">11</option>
+              <option value="">12</option>
+            </select>
+          </div>
+
+          <div class="w-[25%] relative">
+            <label class=" absolute top-1 left-2 text-xs text-[#71767A]" for="year">
+              Année
+            </label>
+            <select class="w-full h-full pl-2 pt-4 bg-black  text-twitter-white text-sm appearance-none border border-[#333639] focus:outline-none  focus:ring-2 focus:ring-[#1A8BD6] rounded " name="" id="year">
+              <option value="" selected></option>
+              <option value="">2023</option>
+              <option value="">2022</option>
+              <option value="">2021</option>
+              <option value="">2020</option>
+              <option value="">2019</option>
+              <option value="">2018</option>
+              <option value="">2017</option>
+            </select>
+          </div>
+        </div>
+
+        <a href="etape3.html" class="absolute bottom-5 block text-center w-full  py-3 bg-[#777A7A] rounded-full text-[#080A0E] text-sm font-extrabold  ">
+          Suivant
+          <!-- <button class="w-full mt-32 py-3 bg-[#777A7A] rounded-full text-[#080A0E] text-sm font-extrabold  " type="submit" value="Suivant" id=""> Suivant </button> -->
+        </a>
+      </form>
+    </div>
+
+  </div>
+
+  <script type="text/javascript">
+
+    const table = [month, day, year];
+
+    table.forEach(element => {
+      const label = element.labels[0];
+      /* console.log(label); */
+
+      element.addEventListener('focus', () => {
+            label.classList.remove('text-[#71767A]');
+            label.classList.add('text-[#1A8BD6]');
+            /* console.log(label); */
+        }
+      )
+        
+      element.addEventListener('blur', () => {
+            label.classList.remove('text-[#1A8BD6]');
+            label.classList.add('text-[#71767A]');
+            /* console.log(label); */
+        }
+      )
+    })
+    
+  </script>
+</body>
+</html>
+
+<!-- evenement keyUp -->

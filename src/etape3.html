@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="../dist/main.css">
+  <title>Twitter register page</title>
+</head>
+<body class="bg-bleu h-screen w-screen flex ">
+  <div class="m-auto w-[600px] h-[650px]  bg-black rounded-2xl">
+    
+    <div class="bg-black h-[10%]">
+      <h2 class="text-twitter-white text-lg pt-3 pl-[12%]">Étapes 3/5</h2>
+    </div>
+
+    <div class="h-[90%] w-[72%] bg-white m-auto">
+      <h1 class="text-3xl text-twitter-white bg-black h-[12%] pl-2">Créer votre compte</h1>
+      <form action="" class="relative bg-black h-[88%]" >
+        <p class="text-sm text-twitter-white mb-3">Saisir le code secret reçu par SMS </p>
+
+        <div id="otp" class="flex justify-between">
+          <input class="mb-8 w-[12%] rounded bg-black text-twitter-white border border-[#333639] focus:outline-none focus:ring-2 focus:ring-[#1A8BD6] py-3 text-center placeholder-[#71767A]" maxlength="1" type="text" id="1" placeholder="E">
+          <input class="mb-8 w-[12%] rounded bg-black text-twitter-white border border-[#333639] focus:outline-none focus:ring-2 focus:ring-[#1A8BD6] py-3 text-center placeholder-[#71767A]" maxlength="1" type="text" id="2" placeholder="9">
+          <input class="mb-8 w-[12%] rounded bg-black text-twitter-white border border-[#333639] focus:outline-none focus:ring-2 focus:ring-[#1A8BD6] py-3 text-center placeholder-[#71767A]" maxlength="1" type="text" id="3" placeholder="3">
+          <input class="mb-8 w-[12%] rounded bg-black text-twitter-white border border-[#333639] focus:outline-none focus:ring-2 focus:ring-[#1A8BD6] py-3 text-center placeholder-[#71767A]" maxlength="1" type="text" id="4" placeholder="B">
+          <input class="mb-8 w-[12%] rounded bg-black text-twitter-white border border-[#333639] focus:outline-none focus:ring-2 focus:ring-[#1A8BD6] py-3 text-center placeholder-[#71767A]" maxlength="1" type="text" id="5" placeholder="5">
+          <input class="mb-8 w-[12%] rounded bg-black text-twitter-white border border-[#333639] focus:outline-none focus:ring-2 focus:ring-[#1A8BD6] py-3 text-center placeholder-[#71767A]" maxlength="1" type="text" id="6" placeholder="4">
+        </div>
+
+        <submit class="absolute bottom-5 text-center w-full py-3 bg-[#777A7A] rounded-full text-[#080A0E] text-sm font-extrabold cursor-pointer">
+          Suivant
+        </submit>      
+      </form>
+    </div>
+
+  </div>
+  
+  <script type="text/javascript">
+    const inputs = document.querySelectorAll('#otp > *[id]');
+    
+    inputs.forEach( (input, i) => {
+      input.addEventListener('keydown', function(event) {
+        if (event.key==="Backspace") {
+          input.value='';
+
+          if (i !==0)
+          inputs[i - 1].focus();
+        
+        } else {
+            if (i===inputs.length - 1 && inputs[i].value !=='' ) {
+              return true;
+
+            } else if (47 < event.keyCode && event.keyCode < 58) {
+                input.value=event.key;
+
+                if (i !==inputs.length - 1)
+                  inputs[i + 1].focus();
+                
+                event.preventDefault();
+
+              } else if (64 < event.keyCode && event.keyCode < 91) {
+                  input.value=String.fromCharCode(event.keyCode); 
+                  
+                  if (i !==inputs.length - 1)
+                    inputs[i + 1].focus();
+                  
+                  event.preventDefault(); 
+                } 
+          } 
+        }); 
+    })
+
+    OTPInput();
+    
+  </script>
+</body>
+</html>
+
+<!-- evenement keyUp -->
