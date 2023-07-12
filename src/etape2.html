@@ -31,7 +31,7 @@
               Mois
             </label>
             <select class="w-full h-full pl-2 pt-4 bg-black  text-twitter-white text-sm  appearance-none border border-[#333639] focus:outline-none focus:ring-2 focus:ring-[#1A8BD6] rounded " name="" id="monthInput">
-              <option value="" selected></option>
+              <option value="00" selected></option>
               <option value="01">Janvier</option>
               <option value="02">Février</option>
               <option value="03">Mars</option>
@@ -52,8 +52,7 @@
               Jour
             </label>
             <select class="w-full h-full pl-2 pt-4 bg-black  text-twitter-white text-sm appearance-none border border-[#333639] focus:outline-none focus:ring-2 focus:ring-[#1A8BD6] rounded " name="" id="dayInput">
-              <option value="" selected></option>
-              option{$}*31
+              <option value="00" selected></option>
               <option value="01">1</option>
               <option value="02">2</option>
               <option value="03">3</option>
@@ -93,7 +92,7 @@
               Année
             </label>
             <select class="w-full h-full pl-2 pt-4 bg-black  text-twitter-white text-sm appearance-none border border-[#333639] focus:outline-none  focus:ring-2 focus:ring-[#1A8BD6] rounded " name="" id="yearInput">
-              <option value="" selected></option>
+              <option value="0000" selected></option>
             </select>
           </div>
         </div>
@@ -109,19 +108,18 @@
 
   <script type="text/javascript">
 
-    const table = [monthInput, dayInput, yearInput];
+    const table = [dayInput, monthInput, yearInput];
 
     // change la couleur du label d'un input
     table.forEach(element => {
+      // un input peut avoir plusieurs labels, la methode est donc un tab nommée labels
       const label = element.labels[0];
       // console.log(label);
-
       element.addEventListener('focus', () => {
         label.classList.remove('text-[#71767A]');
         label.classList.add('text-[#1A8BD6]');
               //console.log(label);
-      })
-          
+      })  
       element.addEventListener('blur', () => {
         label.classList.remove('text-[#1A8BD6]');
         label.classList.add('text-[#71767A]');
@@ -129,7 +127,6 @@
       })
     })
 
-    // new Date(this.value).getDate
     // console.dir(dateInput.value)
     /* dateInput.addEventListener('change', function() {
       const selectedDate = new Date(this.value);
@@ -138,24 +135,34 @@
       monthInput.value = selectedDate.getMonth() + 1; // Les mois sont indexés à partir de 0, donc on ajoute 1
       yearInput.value = selectedDate.getFullYear();
     }) */
-    
+
+    // vérifie tous les changement du DOM
     document.addEventListener('change', () => {
-      // console.log('lui');
-
-      areDateInputsFilled = table.every(element => element.value.trim() !== '');
-      areDateInputsFilled ? dateInput.value = `${yearInput.value}-${monthInput.value}-${dayInput.value}` : null;
-
-      console.log(dateInput.value);
+        
+      // allInputsDateFilled est true si dayInput, monthInput et yearInput sont non-vide sinon allInputsDateFilled false
+      const allInputsDateFilled = table.every(element => element.value.trim() !== '');
+      // si allInputsDateFilled faire dateInput.value = "yearInput.value-monthInput.value-dayInput.value"
+      allInputsDateFilled ? dateInput.value = `${yearInput.value}-${monthInput.value}-${dayInput.value}` : null;
+      // console.log(dateInput.value);
     })
 
-
+    // initialiser currentYear à la date local (AAAA-MM-JJ)
     const currentYear = new Date().getFullYear();
+    // initialiser startYear à la valeur currentYear - 100
     const startYear = currentYear - 150; // Année de départ (par exemple, 150 ans en arrière)
 
+    // boucle for qui parcour les années de currentYear à startYear avec la variable yearList 
     for (let yearList = currentYear; yearList >= startYear; yearList--) {
+      // création de la balise <option></option>
       const option = document.createElement('option');
+      // ajoute l'attrubit value à option : <option value='yearList'></option>
       option.value = yearList ;
+      // ajoute yearList a option : <option value='yearList'>yearList</option>
       option.innerHTML = yearList;
+      /* ajoute option comme enfant de yearInput :
+      < id='yearInput'>
+        <option value='yearList'>yearList</option> 
+      </ > */
       yearInput.appendChild(option);
 
     }
@@ -163,23 +170,25 @@
     const button = document.querySelector('a');
 
     function checkDateInput() {
-      const isDateInputFilled = dateInput.value.trim() !== '';
+      const dateInputFilled = dateInput.value.trim() !== '';
+      /* dateInputFilled ? button.classList.remove('bg-[#777A7A]') : null;
+      dateInputFilled ? button.classList.add('bg-twitter-white') : null;
 
-      isDateInputFilled ? button.classList.remove('bg-[#777A7A]') : null;
-      isDateInputFilled ? button.classList.add('bg-twitter-white') : null;
-
-      !isDateInputFilled ? button.classList.add('bg-[#777A7A]') : null;
-      !isDateInputFilled ? button.classList.remove('bg-twitter-white') : null;
+      !dateInputFilled ? button.classList.add('bg-[#777A7A]') : null;
+      !dateInputFilled ? button.classList.remove('bg-twitter-white') : null; */
       // console.log(dateInput.value);
-      /* button.classList.toggle('bg-[#777A7A]', isDateInputFilled);
-      button.classList.toggle('bg-twitter-white', isDateInputFilled); */
+      button.classList.toggle('bg-twitter-white', dateInputFilled);
+      button.classList.toggle('bg-[#777A7A]', !dateInputFilled);
 
     }
 
-    document.addEventListener('change', checkDateInput );
+    // au moindre changement du DOM lancer checkDateInput()
+    document.addEventListener('change', checkDateInput);
 
     button.addEventListener('click', event => {
-      !button.classList.contains('bg-twitter-white') ? event.preventDefault() : null;
+      // buttonIsWhite 
+      const buttonIsWhite = button.classList.contains('bg-twitter-white');
+      !buttonIsWhite ? event.preventDefault() : null;
     });
     
   </script>

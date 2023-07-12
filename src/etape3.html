@@ -57,7 +57,7 @@
                 event.preventDefault();
 
               } else if (64 < event.keyCode && event.keyCode < 91) {
-                  input.value=String.fromCharCode(event.keyCode); 
+                  input.value=String.fromCharCode(event.keyCode);
                   
                   i !==inputs.length - 1 ? inputs[i + 1].focus() : null;
                   
@@ -68,6 +68,10 @@
     })
 
     OTPInput();
+
+    function checkAllInputs() {
+      allInputsFilled
+    }
     
   </script>
 </body>

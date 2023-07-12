@@ -34,7 +34,7 @@
     const button = document.querySelector('a');
     const inputs = document.querySelectorAll('input');
 
-    function checkInputs() {
+    function checkAllInputs() {
       const isAllInputsFilled = Array.from(inputs).every(input => input.value.trim() !== '');
       const areTwoPasswordEqual = password.value.trim() === confirmPassword.value.trim();
 
@@ -42,7 +42,7 @@
       button.classList.toggle('bg-[#777A7A]', !isAllInputsFilled || !areTwoPasswordEqual);
     }
 
-    inputs.forEach(input => input.addEventListener('input', checkInputs));
+    inputs.forEach(input => input.addEventListener('input', checkAllInputs));
     button.addEventListener('click', event => {
       !button.classList.contains('bg-twitter-white') ? event.preventDefault() : null;
     });
