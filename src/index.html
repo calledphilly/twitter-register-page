@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="fr">
   <head>
@@ -31,20 +30,28 @@
 
   </div>
   <script>
+
     const button = document.querySelector('a');
     const inputs = document.querySelectorAll('input');
 
+    // 
     function checkAllInputs() {
-      const isAllInputsFilled = Array.from(inputs).every(input => input.value.trim() !== '');
-      const areTwoPasswordEqual = password.value.trim() === confirmPassword.value.trim();
+      // Array.from(inputs) transforme la Nodeliste en tableau pour pouvoir utliser les methodes des tableaux
+      // every() regarde tous les elements d'un tableu et applique input.value.trim() !== '' et retourne true or false 
+      const allInputsFilled = Array.from(inputs).every(input => input.value.trim() !== '');
+      // twoPasswordEqual is true si les deux inputs password sont égaux
+      const twoPasswordEqual = password.value.trim() === confirmPassword.value.trim();
 
-      button.classList.toggle('bg-twitter-white', isAllInputsFilled && areTwoPasswordEqual);
-      button.classList.toggle('bg-[#777A7A]', !isAllInputsFilled || !areTwoPasswordEqual);
+      button.classList.toggle('bg-twitter-white', allInputsFilled && twoPasswordEqual);
+      button.classList.toggle('bg-[#777A7A]', !allInputsFilled || !twoPasswordEqual);
     }
 
+    // pour chaque input lors d'un input lancer checkAllInputs()
     inputs.forEach(input => input.addEventListener('input', checkAllInputs));
+    // si button isn't white ne pas permettre le comportement normal de button
     button.addEventListener('click', event => {
-      !button.classList.contains('bg-twitter-white') ? event.preventDefault() : null;
+      const buttonIsWhite = button.classList.contains('bg-twitter-white');
+      !buttonIsWhite ? event.preventDefault() : null;
     });
 
   </script>

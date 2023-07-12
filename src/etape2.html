@@ -109,7 +109,7 @@
   <script type="text/javascript">
 
     const table = [dayInput, monthInput, yearInput];
-
+    
     // change la couleur du label d'un input
     table.forEach(element => {
       // un input peut avoir plusieurs labels, la methode est donc un tab nommée labels
@@ -118,12 +118,12 @@
       element.addEventListener('focus', () => {
         label.classList.remove('text-[#71767A]');
         label.classList.add('text-[#1A8BD6]');
-              //console.log(label);
+        //console.log(label);
       })  
       element.addEventListener('blur', () => {
         label.classList.remove('text-[#1A8BD6]');
         label.classList.add('text-[#71767A]');
-              //console.log(label);
+        //console.log(label);
       })
     })
 
@@ -136,22 +136,12 @@
       yearInput.value = selectedDate.getFullYear();
     }) */
 
-    // vérifie tous les changement du DOM
-    document.addEventListener('change', () => {
-        
-      // allInputsDateFilled est true si dayInput, monthInput et yearInput sont non-vide sinon allInputsDateFilled false
-      const allInputsDateFilled = table.every(element => element.value.trim() !== '');
-      // si allInputsDateFilled faire dateInput.value = "yearInput.value-monthInput.value-dayInput.value"
-      allInputsDateFilled ? dateInput.value = `${yearInput.value}-${monthInput.value}-${dayInput.value}` : null;
-      // console.log(dateInput.value);
-    })
-
     // initialiser currentYear à la date local (AAAA-MM-JJ)
     const currentYear = new Date().getFullYear();
     // initialiser startYear à la valeur currentYear - 100
     const startYear = currentYear - 150; // Année de départ (par exemple, 150 ans en arrière)
 
-    // boucle for qui parcour les années de currentYear à startYear avec la variable yearList 
+    // boucle for qui parcour et ajoute les années de currentYear à startYear avec la variable yearList dans yearInput
     for (let yearList = currentYear; yearList >= startYear; yearList--) {
       // création de la balise <option></option>
       const option = document.createElement('option');
@@ -166,6 +156,17 @@
       yearInput.appendChild(option);
 
     }
+
+    // vérifie tous les changement du DOM
+    document.addEventListener('change', () => {
+        
+      // allInputsDateFilled est true si dayInput, monthInput et yearInput sont non-vide sinon allInputsDateFilled false
+      const allInputsDateFilled = table.every(element => element.value.trim() !== '');
+      // si allInputsDateFilled faire dateInput.value = "yearInput.value-monthInput.value-dayInput.value"
+      allInputsDateFilled ? dateInput.value = `${yearInput.value}-${monthInput.value}-${dayInput.value}` : null;
+      // console.log(dateInput.value);
+    })
+
 
     const button = document.querySelector('a');
 
@@ -186,13 +187,12 @@
     document.addEventListener('change', checkDateInput);
 
     button.addEventListener('click', event => {
-      // buttonIsWhite 
+      // buttonIsWhite is true si button est blanc
       const buttonIsWhite = button.classList.contains('bg-twitter-white');
+      // si button isn't white alors empecher le fontionnement du lien
       !buttonIsWhite ? event.preventDefault() : null;
     });
     
   </script>
 </body>
 </html>
-
-<!-- evenement keyUp -->
