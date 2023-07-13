@@ -16,16 +16,13 @@
       <div class=" h-[90%] w-[72%] bg-white m-auto">
         <h1 class="text-3xl text-twitter-white bg-black h-[12%] pl-2">Créer votre compte</h1>
         <form action="" class="relative bg-black h-[88%]" >
-          <!-- <input class="mb-8 w-full rounded bg-black text-twitter-white border border-[#333639] focus:outline-none focus:ring-2 focus:ring-[#1A8BD6] py-3 indent-3 placeholder-[#71767A]" type="text" placeholder="Nom et prénom">
-          <input class="mb-8 w-full rounded bg-black text-twitter-white border border-[#333639] focus:outline-none focus:ring-2 focus:ring-[#1A8BD6] py-3 indent-3 placeholder-[#71767A]" type="email" placeholder="Email">
-          <input class="mb-8 w-full rounded bg-black text-twitter-white border border-[#333639] focus:outline-none focus:ring-2 focus:ring-[#1A8BD6] py-3 indent-3 placeholder-[#71767A]" type="password" id="password" placeholder="Mot de passe">
-          <input class="mb-8 w-full rounded bg-black text-twitter-white border border-[#333639] focus:outline-none focus:ring-2 focus:ring-[#1A8BD6] py-3 indent-3 placeholder-[#71767A]" type="password" id="confirmPassword" placeholder="Confirmez votre mot de passe"> -->
           
           <div class="relative">
             <label class="absolute duration-150 top-3 left-3 text-[#71767A]" for="name">
               Nom et prénom
             </label>
-            <input class="mb-8 w-full py-3 indent-3 rounded bg-black text-twitter-white placeholder-twitter-white border border-[#333639] focus:outline-none focus:ring-2 focus:ring-[#1A8BD6] " type="text" id="name"> 
+            <p class="hidden absolute top-px right-3 text-xs text-[#71767A]" id="nameCounter"></p>
+            <input class="mb-8 w-full py-3 indent-3 rounded bg-black text-twitter-white placeholder-twitter-white border border-[#333639] focus:outline-none focus:ring-2 focus:ring-[#1A8BD6]" type="text" id="name" maxlength="50"> 
           </div>
 
           <div class="relative">
@@ -59,12 +56,26 @@
   </div>
   <script>
     const inputs = document.querySelectorAll('input');
+    const name = document.getElementById('name');
+    const nameCounter = document.getElementById('nameCounter');
+
+    nameCounter.textContent = `${name.value.length} / ${name.maxLength}`;
+
+    name.addEventListener('focus', () => {
+      nameCounter.classList.toggle('hidden');
+    })
+
+    name.addEventListener('blur', () => {
+      nameCounter.classList.toggle('hidden');
+    })
+    
+    name.addEventListener('input', () => {
+      nameCounter.textContent = `${name.value.length} / ${name.maxLength}`;
+    })
 
     inputs.forEach(input => {
       const label= input.labels[0];
-
       input.addEventListener('focus', () => {
-
         if (input.value.trim() === '') {
           label.classList.toggle('top-3');
           label.classList.toggle('top-px');
@@ -72,11 +83,9 @@
         }
         label.classList.toggle('text-[#71767A]');
         label.classList.toggle('text-[#1A8BD6]');
-
       })
 
       input.addEventListener('blur', () => {
-
         if (input.value.trim() === '') {
           label.classList.toggle('top-3');
           label.classList.toggle('top-px');
@@ -84,13 +93,11 @@
         }
         label.classList.toggle('text-[#71767A]');
         label.classList.toggle('text-[#1A8BD6]');
-
       })}
     )
 
     const button = document.querySelector('a');
 
-    // 
     function checkAllInputs() {
       // Array.from(inputs) transforme la Nodeliste en tableau pour pouvoir utliser les methodes des tableaux
       // every() regarde tous les elements d'un tableu et applique input.value.trim() !== '' et retourne true or false 

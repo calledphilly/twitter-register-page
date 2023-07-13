@@ -4,13 +4,14 @@ module.exports = {
     './src/**/*.html'
   ],
   theme: {
-    colors: {
-      'white': '#ffffff',
-      'twitter-white': '#E6E9EA',
-      'black': '#000000',
-      'bleu': '#242D35',
+    extend: {
+      colors: {
+            'white': '#ffffff',
+            'black': '#000000',
+            'twitter-white': '#E6E9EA',
+            'bleu': '#242D35',
+      },
     },
-    extend: {},
   },
   plugins: [],
 }
