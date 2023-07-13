@@ -58,18 +58,25 @@
     const inputs = document.querySelectorAll('input');
     const name = document.getElementById('name');
     const nameCounter = document.getElementById('nameCounter');
-
+    
+    // nameCounter = 'nombre de caractere dans name' / 'maxLength de name'
     nameCounter.textContent = `${name.value.length} / ${name.maxLength}`;
-
+    
+    // quand l'input name est focus
     name.addEventListener('focus', () => {
-      nameCounter.classList.toggle('hidden');
-    })
-
-    name.addEventListener('blur', () => {
-      nameCounter.classList.toggle('hidden');
+      // enlever hidden au name's counter
+      nameCounter.classList.remove('hidden');
     })
     
+    // quand l'input name n'est plus focus
+    name.addEventListener('blur', () => {
+      // ajouter hidden au name's counter
+      nameCounter.classList.add('hidden');
+    })
+    
+    
     name.addEventListener('input', () => {
+      // nameCounter = 'nombre de caractere dans name' / 'maxLength de name'
       nameCounter.textContent = `${name.value.length} / ${name.maxLength}`;
     })
 
