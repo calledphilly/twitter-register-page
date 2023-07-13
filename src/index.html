@@ -61,30 +61,30 @@
     const inputs = document.querySelectorAll('input');
 
     inputs.forEach(input => {
-      input.addEventListener('focus', event => {
       const label= input.labels[0];
 
-      if (input.value.trim() === '') {
-        label.classList.toggle('top-3');
-        label.classList.toggle('top-px');
-        label.classList.toggle('text-xs');
-      }
-      label.classList.toggle('text-[#71767A]');
-      label.classList.toggle('text-[#1A8BD6]');
-      })
-
-      input.addEventListener('blur', event => {
-        const label= input.labels[0];
+      input.addEventListener('focus', () => {
 
         if (input.value.trim() === '') {
           label.classList.toggle('top-3');
           label.classList.toggle('top-px');
           label.classList.toggle('text-xs');
-        
         }
         label.classList.toggle('text-[#71767A]');
         label.classList.toggle('text-[#1A8BD6]');
-        //console.log(event.target.value);
+
+      })
+
+      input.addEventListener('blur', () => {
+
+        if (input.value.trim() === '') {
+          label.classList.toggle('top-3');
+          label.classList.toggle('top-px');
+          label.classList.toggle('text-xs');
+        }
+        label.classList.toggle('text-[#71767A]');
+        label.classList.toggle('text-[#1A8BD6]');
+
       })}
     )
 
