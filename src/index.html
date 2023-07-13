@@ -16,10 +16,38 @@
       <div class=" h-[90%] w-[72%] bg-white m-auto">
         <h1 class="text-3xl text-twitter-white bg-black h-[12%] pl-2">Créer votre compte</h1>
         <form action="" class="relative bg-black h-[88%]" >
-          <input class="mb-8 w-full rounded bg-black text-twitter-white border border-[#333639] focus:outline-none focus:ring-2 focus:ring-[#1A8BD6] py-3 indent-3 placeholder-[#71767A]" type="text" placeholder="Nom et prénom">
+          <!-- <input class="mb-8 w-full rounded bg-black text-twitter-white border border-[#333639] focus:outline-none focus:ring-2 focus:ring-[#1A8BD6] py-3 indent-3 placeholder-[#71767A]" type="text" placeholder="Nom et prénom">
           <input class="mb-8 w-full rounded bg-black text-twitter-white border border-[#333639] focus:outline-none focus:ring-2 focus:ring-[#1A8BD6] py-3 indent-3 placeholder-[#71767A]" type="email" placeholder="Email">
           <input class="mb-8 w-full rounded bg-black text-twitter-white border border-[#333639] focus:outline-none focus:ring-2 focus:ring-[#1A8BD6] py-3 indent-3 placeholder-[#71767A]" type="password" id="password" placeholder="Mot de passe">
-          <input class="mb-8 w-full rounded bg-black text-twitter-white border border-[#333639] focus:outline-none focus:ring-2 focus:ring-[#1A8BD6] py-3 indent-3 placeholder-[#71767A]" type="password" id="confirmPassword" placeholder="Confirmez votre mot de passe">
+          <input class="mb-8 w-full rounded bg-black text-twitter-white border border-[#333639] focus:outline-none focus:ring-2 focus:ring-[#1A8BD6] py-3 indent-3 placeholder-[#71767A]" type="password" id="confirmPassword" placeholder="Confirmez votre mot de passe"> -->
+          
+          <div class="relative">
+            <label class="absolute duration-150 top-3 left-3 text-[#71767A]" for="name">
+              Nom et prénom
+            </label>
+            <input class="mb-8 w-full py-3 indent-3 rounded bg-black text-twitter-white placeholder-twitter-white border border-[#333639] focus:outline-none focus:ring-2 focus:ring-[#1A8BD6] " type="text" id="name"> 
+          </div>
+
+          <div class="relative">
+            <label class="absolute duration-150 top-3 left-3 text-[#71767A]" for="email">
+              Email
+            </label>
+            <input class="mb-8 w-full py-3 indent-3 rounded bg-black text-twitter-white placeholder-twitter-white border border-[#333639] focus:outline-none focus:ring-2 focus:ring-[#1A8BD6] " type="email" id="email"> 
+          </div>
+
+          <div class="relative">
+            <label class="absolute duration-150 top-3 left-3 text-[#71767A]" for="password">
+              Mot de passe
+            </label>
+            <input class="mb-8 w-full py-3 indent-3 rounded bg-black text-twitter-white placeholder-twitter-white border border-[#333639] focus:outline-none focus:ring-2 focus:ring-[#1A8BD6] " type="password" id="password"> 
+          </div>
+
+          <div class="relative">
+            <label class="absolute duration-150 top-3 left-3 text-[#71767A]" for="confirmPassword">
+              Confirmez votre mot de passe
+            </label>
+            <input class="mb-8 w-full py-3 indent-3 rounded bg-black text-twitter-white placeholder-twitter-white border border-[#333639] focus:outline-none focus:ring-2 focus:ring-[#1A8BD6] " type="password" id="confirmPassword"> 
+          </div>
         
 
           <a href="etape2.html" class="absolute bottom-5 block text-center w-full mt-28  py-3 bg-[#777A7A] rounded-full text-[#080A0E] text-sm font-extrabold">
@@ -30,9 +58,37 @@
 
   </div>
   <script>
+    const inputs = document.querySelectorAll('input');
+
+    inputs.forEach(input => {
+      input.addEventListener('focus', event => {
+      const label= input.labels[0];
+
+      if (input.value.trim() === '') {
+        label.classList.toggle('top-3');
+        label.classList.toggle('top-px');
+        label.classList.toggle('text-xs');
+      }
+      label.classList.toggle('text-[#71767A]');
+      label.classList.toggle('text-[#1A8BD6]');
+      })
+
+      input.addEventListener('blur', event => {
+        const label= input.labels[0];
+
+        if (input.value.trim() === '') {
+          label.classList.toggle('top-3');
+          label.classList.toggle('top-px');
+          label.classList.toggle('text-xs');
+        
+        }
+        label.classList.toggle('text-[#71767A]');
+        label.classList.toggle('text-[#1A8BD6]');
+        //console.log(event.target.value);
+      })}
+    )
 
     const button = document.querySelector('a');
-    const inputs = document.querySelectorAll('input');
 
     // 
     function checkAllInputs() {

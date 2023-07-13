@@ -18,15 +18,14 @@
       <form action="" class="relative bg-black h-[88%]" >
         <p class="text-sm text-twitter-white mb-3">Saisir le code secret reçu par SMS </p>
 
+        <input type="text" id="codeInput" class="hidden">
         <div id="otp" class="flex justify-between">
-          <input type="text" id="codeInput" class="hidden">
-
-          <input class="mb-8 w-[12%] rounded bg-black text-twitter-white border border-[#333639] focus:outline-none focus:ring-2 focus:ring-[#1A8BD6] py-3 text-center placeholder-[#71767A]" maxlength="1" type="text" id="1" placeholder="E">
-          <input class="mb-8 w-[12%] rounded bg-black text-twitter-white border border-[#333639] focus:outline-none focus:ring-2 focus:ring-[#1A8BD6] py-3 text-center placeholder-[#71767A]" maxlength="1" type="text" id="2" placeholder="9">
-          <input class="mb-8 w-[12%] rounded bg-black text-twitter-white border border-[#333639] focus:outline-none focus:ring-2 focus:ring-[#1A8BD6] py-3 text-center placeholder-[#71767A]" maxlength="1" type="text" id="3" placeholder="3">
-          <input class="mb-8 w-[12%] rounded bg-black text-twitter-white border border-[#333639] focus:outline-none focus:ring-2 focus:ring-[#1A8BD6] py-3 text-center placeholder-[#71767A]" maxlength="1" type="text" id="4" placeholder="B">
-          <input class="mb-8 w-[12%] rounded bg-black text-twitter-white border border-[#333639] focus:outline-none focus:ring-2 focus:ring-[#1A8BD6] py-3 text-center placeholder-[#71767A]" maxlength="1" type="text" id="5" placeholder="5">
-          <input class="mb-8 w-[12%] rounded bg-black text-twitter-white border border-[#333639] focus:outline-none focus:ring-2 focus:ring-[#1A8BD6] py-3 text-center placeholder-[#71767A]" maxlength="1" type="text" id="6" placeholder="4">
+          <input class="mb-8 w-[12%] rounded bg-black text-twitter-white border border-[#333639] focus:outline-none focus:ring-2 focus:ring-[#1A8BD6] py-3 text-center placeholder-[#71767A]" maxlength="1" type="text" id="input1" placeholder="E">
+          <input class="mb-8 w-[12%] rounded bg-black text-twitter-white border border-[#333639] focus:outline-none focus:ring-2 focus:ring-[#1A8BD6] py-3 text-center placeholder-[#71767A]" maxlength="1" type="text" id="input2" placeholder="9">
+          <input class="mb-8 w-[12%] rounded bg-black text-twitter-white border border-[#333639] focus:outline-none focus:ring-2 focus:ring-[#1A8BD6] py-3 text-center placeholder-[#71767A]" maxlength="1" type="text" id="input3" placeholder="3">
+          <input class="mb-8 w-[12%] rounded bg-black text-twitter-white border border-[#333639] focus:outline-none focus:ring-2 focus:ring-[#1A8BD6] py-3 text-center placeholder-[#71767A]" maxlength="1" type="text" id="input4" placeholder="B">
+          <input class="mb-8 w-[12%] rounded bg-black text-twitter-white border border-[#333639] focus:outline-none focus:ring-2 focus:ring-[#1A8BD6] py-3 text-center placeholder-[#71767A]" maxlength="1" type="text" id="input5" placeholder="5">
+          <input class="mb-8 w-[12%] rounded bg-black text-twitter-white border border-[#333639] focus:outline-none focus:ring-2 focus:ring-[#1A8BD6] py-3 text-center placeholder-[#71767A]" maxlength="1" type="text" id="input6" placeholder="4">
         </div>
 
         <submit class="absolute bottom-5 text-center w-full py-3 bg-[#777A7A] rounded-full text-[#080A0E] text-sm font-extrabold cursor-pointer">
@@ -41,7 +40,12 @@
     const inputs = document.querySelectorAll('#otp > *[id]');
 
     inputs.forEach((input, i) => {
-      input.addEventListener('keydown', event => {
+      input.addEventListener('keyup', event => {
+        /* console.log(input.value);
+        console.log(codeInput.value); */
+        codeInput.value = ''+input1.value+''+input2.value+''+input3.value+''+input4.value+''+input5.value+''+input6.value+'';
+        checkInput();
+        
         if (event.key==="Backspace") {
           // Backspace is touche supprimer
           // vider a value de l'input
@@ -51,17 +55,26 @@
           i !== 0 ? inputs[i - 1].focus() : null;
 
         } else {
-            if (i == inputs.length - 1 && inputs[i].value.trim() !== '') {
-              console.log('t');
+            if (i === inputs.length - 1 && inputs[i].value.trim() !== '' && (47 < event.keyCode && event.keyCode < 58 || 64 < event.keyCode && event.keyCode < 91)) {
+              
+              input.value = (String.fromCharCode(event.keyCode)).toUpperCase();
+              //console.log(input.value);
+              const allInputsFilled = Array.from(inputs).every(input => input.value.trim() !== '');
+              console.log(allInputsFilled);
+              
+              //codeInput.value = ''+input1.value+''+input2.value+''+input3.value+''+input4.value+''+input5.value+''+input6.value+'';
+              //console.log(codeInput.value);
+              //allInputsFilled ? checkInput() : null;
+              // Array.from(inputs).every(input => input.value.trim() !== '') ? console.log('w') : null;
               // si la valeur saisie est sur le dernier input et que tous les inputs sont remplie retourner true
-              return true;
+
 
             } else if (47 < event.keyCode && event.keyCode < 58) {
                 // les keyCode de 47 à 58 sont les chiffres du clavier
 
                 // la valeur de l'input égale la touche saisie
                 // input.value=event.key;
-                input.value= String.fromCharCode(event.keyCode);
+                input.value = String.fromCharCode(event.keyCode);
                 // si je ne suis pas sur le dernier input apres avoir saisie ma valeur alors avancer d'1 input
                 i !==inputs.length - 1 ? inputs[i + 1].focus() : null;
 
@@ -80,7 +93,7 @@
                 // les keyCode de 64 à 91 sont les lettres du clavier
 
                 // la valeur de l'input égale la touche saisie
-                input.value=String.fromCharCode(event.keyCode);
+                input.value = String.fromCharCode(event.keyCode);
 
                 //si je ne suis pas sur le dernier input apres avoir saisie ma valeur alors avancer d'1 input
                 i !== inputs.length - 1 ? inputs[i + 1].focus() : null;
@@ -93,10 +106,10 @@
     })
   
     function checkInput() {
-      const inputFilled =  codeInput.value.trim() !== '';
+      const inputFilled =  codeInput.value.length == inputs.length;
 
-      submit.classList.toggle('bg-[#777A7A]',!inputFilled);
-      submit.classList.toggle('bg-twitter-white',inputFilled);
+        submit.classList.toggle('bg-[#777A7A]',!inputFilled);
+        submit.classList.toggle('bg-twitter-white',inputFilled);
     }
 
     const submit = document.querySelector('submit');
@@ -105,7 +118,7 @@
       checkInput();
 
       const submitIsWhite = submit.classList.contains('bg-twitter-white');
-      !submitIsWhite ? event.preventDefault : null;
+      !submitIsWhite ? event.preventDefault() : null;
     })
 
   </script>
