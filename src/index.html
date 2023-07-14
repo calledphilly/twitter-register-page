@@ -74,15 +74,19 @@
       nameCounter.classList.add('hidden');
     })
     
-    
+    // quand la valeur de name est modifié
     name.addEventListener('input', () => {
       // nameCounter = 'nombre de caractere dans name' / 'maxLength de name'
       nameCounter.textContent = `${name.value.length} / ${name.maxLength}`;
     })
 
+    // pour chaque élément la NodeList inputs
     inputs.forEach(input => {
+      // label est le label de chaque input de la NodeList
       const label= input.labels[0];
+      // quand un input est focus
       input.addEventListener('focus', () => {
+        // si l'input est vide lorsqu'il est focus
         if (input.value.trim() === '') {
           label.classList.toggle('top-3');
           label.classList.toggle('top-px');
@@ -92,7 +96,9 @@
         label.classList.toggle('text-[#1A8BD6]');
       })
 
+      // quand l'input n'est plus focus
       input.addEventListener('blur', () => {
+        // si linput est vide lorsqu'il n'est plus focus
         if (input.value.trim() === '') {
           label.classList.toggle('top-3');
           label.classList.toggle('top-px');
