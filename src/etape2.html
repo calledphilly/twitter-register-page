@@ -163,7 +163,7 @@
     // vérifie tous les changement du DOM
     document.addEventListener('change', () => {
         
-      // allInputsDateFilled est true si dayInput, monthInput et yearInput sont non-vide sinon allInputsDateFilled false
+      // allInputsDateFilled true si dayInput, monthInput et yearInput sont non-vide sinon allInputsDateFilled false
       const allInputsDateFilled = table.every(element => element.value.trim() !== '');
       // si allInputsDateFilled faire dateInput.value = "yearInput.value-monthInput.value-dayInput.value"
       allInputsDateFilled ? dateInput.value = `${yearInput.value}-${monthInput.value}-${dayInput.value}` : null;
